@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+:root {
+    --bg-Light: hsl(0, 0%, 98%);
+    --todos-bg-light: hsl(236, 33%, 92%);
+    --Light-Grayish-Blue-Light: hsl(233, 11%, 84%);
+    --Dark-Grayish-Blue-Light: hsl(236, 9%, 61%);
+    --Very-Dark-Grayish-BlueL: hsl(235, 19%, 35%);
+
+/* ### Dark Theme */
+
+    --bg-Dark: hsl(235, 21%, 11%);
+    --todos-bg-dark: hsl(235, 24%, 19%);
+    --Light-Grayish-Blue-Dark: hsl(234, 39%, 85%);
+    --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+    --Dark-Grayish-Blue-Dark: hsl(234, 11%, 52%);
+    --Very-Dark-Grayish-Blue1D: hsl(233, 14%, 35%);
+    --Very-Dark-Grayish-Blue2D: hsl(237, 14%, 26%);
+
+    --left-pad: 4.6rem;
+    --td-height: 4rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Josefin Sans", sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    background:var(--bg-Dark) url(images/bg-desktop-dark.jpg) top no-repeat;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 34rem;
+    gap: 1rem;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+h1 {
+    color: var(--bg-Light);
+    font-size: 2.5rem;
+    letter-spacing: 15px;
+}
+
+.mode-toggle {
+    appearance: none;
+    background: transparent url(images/icon-sun.svg) center center no-repeat;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+}
+
+.mode-toggle:checked {
+    background: url(images/icon-moon.svg);
+
+}
+
+
+.todo-input-container {
+    position: relative;
+}
+.todo-input-container::before {
+    content: "";
+    display: block;
+    height: 1.55rem;
+    width: 1.55rem;
+    border: 1px solid var(--Very-Dark-Grayish-Blue2D);
+    border-radius: 50%;
+    background: transparent;
+    position: absolute;
+    top: 32%;
+    left: 1.6rem;
+}
+
+#create-todo {
+    font-family: inherit;
+    font-size: 1.1rem;
+    padding-left: var(--left-pad);
+    height: var(--td-height);
+    border-radius: .3rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--Light-Grayish-Blue-Dark);
+    background-color: var(--todos-bg-dark);
+}
+
+
+#create-todo::placeholder {
+    color: var(--Dark-Grayish-Blue-Dark);
+}
+
+.todo:first-child {
+    border-radius: .3rem .3rem 0 0;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    background: var(--todos-bg-dark);
+    position: relative;
+    /* padding-left: var(--left-pad); */
+    border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D);
+    height: var(--td-height);
+    cursor: pointer;
+}
+
+
+
+.todo-check {
+    appearance: none;
+    height: 1.55rem;
+    width: 1.55rem;
+    flex-shrink: 0;
+    border: 1px solid var(--Very-Dark-Grayish-Blue2D);
+    border-radius: 50%;
+    background: transparent;
+    align-self: center;
+    margin-left: 1.6rem;
+    margin-right: 1.4rem;
+    cursor: pointer;
+}
+
+.todo-check:checked {
+    background-image: url(images/icon-check.svg), linear-gradient(135deg, rgba(102,196,219,1) 10%, rgba(217,120,255,1) 91%);
+    background-repeat: no-repeat;
+    background-position: 55% 55%;
+    transition: 200ms ease-in-out;
+}
+
+.todo-text {
+    color: var(--Light-Grayish-Blue-Dark);
+    font-size: 1.2rem;
+    letter-spacing: -0.8px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: var(--Very-Dark-Grayish-Blue2D);
+}
+
+.remove-todo-btn {
+    display: none;
+    background: transparent url(images/icon-cross.svg) center center no-repeat;
+    border-radius: 50%;
+    border: none;
+    outline:  none;
+    height: 1.55rem;
+    width: 1.55rem;
+    position: absolute;
+    top: 28%;
+    left: 92%;
+    cursor: pointer;
+}
+
+
+.bottom-part {
+    display: flex;
+    justify-content: space-between;
+    color: var(--Very-Dark-Grayish-Blue1D);
+    background: var(--todos-bg-dark);
+    border-radius: 0 0 .3rem .3rem;
+    padding: 0 .8rem;
+    margin-top: -1rem;
+}
+
+.sort-todos {
+    display: flex;
+    gap: 1rem;
+}
+
+.bottom-text:hover {
+    color: var(--Light-Grayish-Blue-hover);
+    cursor: pointer;
+} 
+
+.selected {
+    color: #3a48c7;
+}
+
+.flex {
+    display: flex;
+}
+
+.toggle-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}

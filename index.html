@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  
+  <title>Frontend Mentor | Todo app</title>
+ 
+</head>
+<body>
+  <main>
+    <!-- HEADLINE + MODE TOGGLE -->
+    <div class="top">
+      <h1>Todo</h1>
+      <input type="checkbox" class="mode-toggle">
+    </div>
+
+    <!-- TEXT INPUT  -->
+    <div class="todo-input-container">
+    <input type="text" placeholder="Create a new todo..." id="create-todo"></div>
+
+     <!-- EACH TODOS -->
+    <div class="todos">
+
+      <div class="all todo completed">
+        <div class="flex">
+          <input type="checkbox" checked class="todo-check completed">
+          <p class="todo-text completed">Complete online JavaScript course</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+   
+      <div class="all todo active">
+        <div class="flex">
+          <input type="checkbox" class="todo-check">
+          <p class="todo-text">Jog around the park 3x</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+
+      <div class="all todo active">
+        <div class="flex">
+          <input type="checkbox" class="todo-check">
+          <p class="todo-text">10 minutes meditation</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+
+      <div class="all todo active">
+        <div class="flex">
+          <input type="checkbox" class="todo-check">
+          <p class="todo-text">Read for 1 hour</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+
+      <div class="all todo active">
+        <div class="flex">
+          <input type="checkbox" class="todo-check">
+          <p class="todo-text">Pick up groceries</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+
+      <div class="all todo active">
+        <div class="flex">
+          <input type="checkbox" class="todo-check">
+          <p class="todo-text">Complete Todo App on Frontend Mentor</p>
+        </div>
+        <button class="remove-todo-btn"></button>
+      </div>
+
+      
+      
+    </div>
+    <!-- TODOS BOTTOM PART  -->
+      <div class="bottom-part">
+        <p id="items" class="bottom-text"><span id="items-left">5</span> items left</p>
+        <div class="sort-todos">
+          <p id="all" class="sort-btn bottom-text selected">All</p>
+          <p id="active" class="sort-btn bottom-text">Active</p> 
+          <p id="completed" class="sort-btn bottom-text">Completed</p> 
+        </div>
+        <p id="clear-completed" class="bottom-text">Clear Completed</p>
+          
+          <!-- Drag and drop to reorder list -->
+        </div>
+  </main>
+</body>
+</html>

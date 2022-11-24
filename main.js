@@ -2,6 +2,7 @@ const input = document.getElementById("create-todo");
 const todosBox = document.querySelector(".todos");
 const todos = document.querySelectorAll(".todo");
 const themeBtn = document.querySelector(".mode-toggle");
+const submitBtn = document.querySelector(".submit-btn");
 
 const itemsLeft = document.getElementById("items-left");
 
@@ -13,164 +14,132 @@ const sortBtns = document.querySelectorAll(".sort-btn");
 const clearCompleted = document.getElementById("clear-completed");
 const removeBtn = document.querySelectorAll(".remove-todo-btn");
 
+submitBtn.addEventListener("click", createTodo);
 
+function createTodo() {
+    if (input.value !== "") {
+    const newTodo = document.createElement("DIV");
+    newTodo.classList.add("all");
+    newTodo.classList.add("todo");
+    newTodo.classList.add("active");
+   
 
-//DISPLAY X (for deleting todos) ON MOUSEOVER
-todos.forEach(todo => todo.addEventListener("mouseover", function() {
-    todo.lastElementChild.classList.add("toggle-block");
-}))
+    const newFlexDiv = document.createElement("DIV");
+    newFlexDiv.classList.add("flex");
+ 
+    const newCheckBox = document.createElement("input");
+    newCheckBox.setAttribute("type", "checkbox");
+    newCheckBox.classList.add("todo-check");
 
-//HIDE X (for deleting todos) ON MOUSEOUT
-todos.forEach(todo => todo.addEventListener("mouseout", function() {
-    todo.lastElementChild.classList.remove("toggle-block");
-}))
+    const newPara = document.createElement("p");
+    newPara.classList.add("todo-text");
+    newPara.textContent = input.value;
 
-//ENTER TO INSERT NEW TODO
-input.addEventListener("keypress", function createTodo(event, newDiv) {
+    const newDeleteBtn = document.createElement("button");
+    newDeleteBtn.classList.add("remove-todo-btn");
+
+    //DELETE TODO 
+    newDeleteBtn.addEventListener("click", function(e) {
+         setTimeout(() => {newDeleteBtn.parentElement.remove()}, 500);
+     
+         newDeleteBtn.parentElement.animate([
+             // keyframes
+             { opacity: 1},
+             { opacity: 0},
+             { transform: 'translateX(700px)' },
+             { opacity: 0}
+           ], {
+             // timing options
+             duration: 500,
+             iterations: 1,
+           });
+     })
+
+    //DISPLAY X (for deleting todos) ON MOUSEOVER
+    newTodo.addEventListener("mouseover", function() {
+        newTodo.lastElementChild.classList.add("toggle-block");
+    })
+
+    //HIDE X (for deleting todos) ON MOUSEOUT
+    newTodo.addEventListener("mouseout", function() {
+        newTodo.lastElementChild.classList.remove("toggle-block");
+    })
+
+    
+    newFlexDiv.appendChild(newCheckBox);
+    newFlexDiv.appendChild(newPara);
+    newTodo.appendChild(newFlexDiv);
+    newTodo.appendChild(newDeleteBtn);
+    todosBox.appendChild(newTodo);
+    
+    //SWITCH ACTIVE / COMPLETED STATE
+    newTodo.addEventListener("click", function(e) {
+        if (!newTodo.classList.contains("completed")) {
+            newTodo.classList.add("completed");
+            newTodo.classList.remove("active");
+            newTodo.firstChild.firstChild.nextSibling.classList.add("completed");
+            newTodo.firstChild.firstChild.checked = true; 
+        } else {
+            newTodo.classList.remove("completed");
+            newTodo.classList.add("active");
+            newTodo.firstChild.firstChild.nextSibling.classList.remove("completed");
+            newTodo.firstChild.firstChild.checked = false; 
+        }})
+        input.value = "";
+        checkCount()
+    }
+}
+
+// BUTTON CLICK ON ENTER PRESS
+input.addEventListener("keypress", function(event) {
+    // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
-        if (input.value !== "") {
-            //CREATE NEW DIV WITH ALL CHILDS + ASSIGN TEXT CONTEXT 
-            newDiv = todos[1].cloneNode(true),
-            newDiv.firstChild.nextSibling.childNodes[3].textContent = input.value,
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      submitBtn.click();
+    }
+  });
 
-            //ADD EVENT LISTENERS TO NEW TODO
-            //adding whole function instead of just assigning existing function because i could not figure it out 
-            newDiv.addEventListener("click", function(e) {
-                if (e.target.nodeName == "BUTTON") {
-                    return
-                }
-                if (!newDiv.classList.contains("completed")) {
-                    newDiv.classList.add("completed");
-                    newDiv.classList.remove("active");
-                    newDiv.firstChild.nextSibling.childNodes[3].classList.add("completed");
-                    newDiv.firstChild.nextSibling.childNodes[1].checked = true; 
-                } else {
-                    newDiv.classList.remove("completed");
-                    newDiv.classList.add("active");
-                    newDiv.firstChild.nextSibling.childNodes[3].classList.remove("completed");
-                    newDiv.firstChild.nextSibling.childNodes[1].checked = false; 
-                }
-                todoCount()}),
-                newDiv.addEventListener("mouseover", function() {
-                    newDiv.lastElementChild.classList.add("toggle-block");
-                }),
-                newDiv.addEventListener("mouseout", function() {
-                    newDiv.lastElementChild.classList.remove("toggle-block");
-                }),
-            todosBox.appendChild(newDiv),
-                input.value = "";
-                    todoCount()
-            //at first I wanted to do it this way but it stopped javascript after adding new todo
-    //     todosBox.innerHTML += `<div class="all todo active">
-    //     <div class="flex">
-    //       <input type="checkbox" class="todo-check">
-    //       <p class="todo-text">${input.value}</p>
-    //     </div>
-    //     <button class="remove-todo-btn"></button>
-    //   </div>`;
+
+
+    const r = document.querySelector(":root");
+    const body = document.querySelector("body");
+
+themeBtn.addEventListener("click", function() {
+    if (themeBtn.checked){
+        body.style.background = "var(--bg-Light) url(images/bg-desktop-light.jpg) top no-repeat";
+
+        r.style.setProperty("--todos-bg-dark", "#fff");
+        r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(240deg 12% 10% / 58%)");
+        r.style.setProperty("--Very-Dark-Grayish-Blue2D", "lightgray");
+
+        submitBtn.style.background = "#d9d9d9 url(images/icons8-enter-24.png) center no-repeat";
+    
+    } else {
+        body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top no-repeat";
         
-        }
+        r.style.setProperty("--todos-bg-dark", "hsl(235, 24%, 19%)");
+        r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");
+        r.style.setProperty("--Very-Dark-Grayish-Blue2D", "hsl(237, 14%, 26%)");
+        submitBtn.style.background = "lightslategray url(images/icons8-enter-24.png) center no-repeat";
+    
     }
 })
 
-
-//REMOVE TODO BUTTON
-removeBtn.forEach(btn => btn.addEventListener("click", function(e) {
-   if (e.currentTarget.parentElement.classList.contains("active")) {
-    
-    console.log(btn.parentElement)
-   }
-    setTimeout(() => {btn.parentElement.remove()}, 500);
-
-    btn.parentElement.animate([
-        // keyframes
-        { opacity: 1},
-        { opacity: 0},
-        { transform: 'translateX(700px)' },
-        { opacity: 0}
-      ], {
-        // timing options
-        duration: 500,
-        iterations: 1,
-      });
-      todoCount()
-      
-}))
-
-//CHANGE STATE OF TODO (ACTIVE/COMPLETED)
-todos.forEach(todo => todo.addEventListener("click", function(e) {
-    if (e.target.nodeName == "BUTTON") {
-        return
-    }
-    if (!todo.classList.contains("completed")) {
-        todo.classList.add("completed");
-        todo.classList.remove("active");
-        todo.firstChild.nextSibling.childNodes[3].classList.add("completed");
-        todo.firstChild.nextSibling.childNodes[1].checked = true; 
-    } else {
-        todo.classList.remove("completed");
-        todo.classList.add("active");
-        todo.firstChild.nextSibling.childNodes[3].classList.remove("completed");
-        todo.firstChild.nextSibling.childNodes[1].checked = false; 
-    }
-    todoCount()
-}))
-
-
-
-
-//SHOW COUNT OF ACTIVE TODOS
-function todoCount() {
-    let count = 0;
-    for (let i = 0; i<todos.length;i++) {
-        if (todos[i].classList.contains("active") && !todos[i].classList.contains("display-none")) {
-            count++
-        }
-    }
-
-    itemsLeft.textContent = count
-}
-//improve counting / problem with deleting active todo
-
-//sort completed/active todos? cant use sort on nodelist
-// function sortFunc() {
-    
-//     todosBox.sort((a,b) => a.classList.contains("active") > b.classList.contains("active") ? 1 : -1 
-//     )}
-
-
-    // function clickHandler(e) {
-        
-    //       console.log(e.target.innerHTML);
-    // }
-      
-    //   // reference to a list
-    //   const todosBox = document.querySelector('.todos');
-      
-    //   // add a single listener on list item
-    //   todosBox.addEventListener('click', clickHandler);
-
-// let newDiv;
-//     document.querySelector("body").addEventListener("click", function() {
-//         newDiv = todos[1].cloneNode(true),
-//         newDiv.firstChild.nextSibling.childNodes[3].textContent = input.value,
-//         todosBox.appendChild(newDiv)
-        
-//     })
-
-//SORT TODOS FUNCTION
-sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {
-    for (sortingBtn of todos) {
-        sortBtns.forEach(btn => btn.style.color = "var(--Very-Dark-Grayish-Blue1D)"),
-        this.style.color = "#3a48c7";
-    }
-
-    for (sortingBtn of todos) {
-        if (!sortingBtn.classList.contains(this.id)) {
-            sortingBtn.classList.add("display-none")
+clearCompleted.addEventListener("click", function() {
+    for (let i = 0; i < todosBox.childElementCount;i++) {
+    if (todosBox.children[i].classList.contains("completed")) {
+        todosBox.children[i].remove()
         } else {
-            sortingBtn.classList.remove("display-none")
+           console.log(i) 
         }
-        todoCount()
+        
     }
-}))
+checkCount()
+})
+
+
+function checkCount() {
+    itemsLeft.textContent = todosBox.childElementCount
+}

@@ -23,6 +23,7 @@
 
 * {
     box-sizing: border-box;
+    transition: background 150ms ease;
 }
 
 body {
@@ -70,13 +71,14 @@ h1 {
 
 .mode-toggle:checked {
     background: url(images/icon-moon.svg);
-
 }
 
 
 .todo-input-container {
     position: relative;
+    display: flex;
 }
+
 .todo-input-container::before {
     content: "";
     display: block;
@@ -86,8 +88,17 @@ h1 {
     border-radius: 50%;
     background: transparent;
     position: absolute;
-    top: 32%;
+    top: 28%;
     left: 1.6rem;
+}
+
+.submit-btn {
+    background: lightslategray url(images/icons8-enter-24.png) center no-repeat;
+    width: 3.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0 .3rem .3rem 0;
+    cursor: pointer;
 }
 
 #create-todo {
@@ -95,7 +106,7 @@ h1 {
     font-size: 1.1rem;
     padding-left: var(--left-pad);
     height: var(--td-height);
-    border-radius: .3rem;
+    border-radius: .3rem 0 0 .3rem;
     border: none;
     outline: none;
     width: 100%;
@@ -106,6 +117,12 @@ h1 {
 
 #create-todo::placeholder {
     color: var(--Dark-Grayish-Blue-Dark);
+}
+
+.todos {
+    -webkit-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
 }
 
 .todo:first-child {
@@ -122,7 +139,6 @@ h1 {
     height: var(--td-height);
     cursor: pointer;
 }
-
 
 
 .todo-check {
@@ -188,7 +204,7 @@ h1 {
 }
 
 .bottom-text:hover {
-    color: var(--Light-Grayish-Blue-hover);
+    color: #878fff;
     cursor: pointer;
 } 
 

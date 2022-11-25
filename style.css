@@ -31,7 +31,6 @@ body {
 
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
 
     background:var(--bg-Dark) url(images/bg-desktop-dark.jpg) top no-repeat;
@@ -42,6 +41,7 @@ main {
     flex-direction: column;
     width: 34rem;
     gap: 1rem;
+    margin-top: 2.8rem;
 }
 
 .top {
@@ -67,10 +67,12 @@ h1 {
     border-radius: 50%;
     cursor: pointer;
     transition: 200ms ease-in-out;
+    filter: hue-rotate(90deg);
 }
 
 .mode-toggle:checked {
     background: url(images/icon-moon.svg);
+    
 }
 
 
@@ -136,8 +138,9 @@ box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
     position: relative;
     /* padding-left: var(--left-pad); */
     border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D);
-    height: var(--td-height);
+    height: auto;
     cursor: pointer;
+    word-break: break-word;
 }
 
 
@@ -166,6 +169,7 @@ box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
     color: var(--Light-Grayish-Blue-Dark);
     font-size: 1.2rem;
     letter-spacing: -0.8px;
+    padding-right: 2rem;
 }
 
 .completed {

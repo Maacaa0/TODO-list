@@ -6,9 +6,6 @@ const submitBtn = document.querySelector(".submit-btn");
 
 const itemsLeft = document.getElementById("items-left");
 
-const sortAll = document.getElementById("all");
-const sortActive = document.getElementById("active");
-const sortCompleted = document.getElementById("completed");
 const sortBtns = document.querySelectorAll(".sort-btn"); 
 
 const clearCompleted = document.getElementById("clear-completed");
@@ -53,6 +50,7 @@ function createTodo() {
              duration: 500,
              iterations: 1,
            });
+           setTimeout(() => {checkCount()}, 500);
      })
 
     //DISPLAY X (for deleting todos) ON MOUSEOVER
@@ -74,6 +72,9 @@ function createTodo() {
     
     //SWITCH ACTIVE / COMPLETED STATE
     newTodo.addEventListener("click", function(e) {
+        if (e.target == newDeleteBtn) {
+            return
+        }
         if (!newTodo.classList.contains("completed")) {
             newTodo.classList.add("completed");
             newTodo.classList.remove("active");
@@ -84,10 +85,12 @@ function createTodo() {
             newTodo.classList.add("active");
             newTodo.firstChild.firstChild.nextSibling.classList.remove("completed");
             newTodo.firstChild.firstChild.checked = false; 
-        }})
+        }
+        checkCount();
+    })
         input.value = "";
         checkCount()
-    }
+  }
 }
 
 // BUTTON CLICK ON ENTER PRESS
@@ -102,7 +105,7 @@ input.addEventListener("keypress", function(event) {
   });
 
 
-
+// THEME CHANGE
     const r = document.querySelector(":root");
     const body = document.querySelector("body");
 
@@ -122,24 +125,46 @@ themeBtn.addEventListener("click", function() {
         r.style.setProperty("--todos-bg-dark", "hsl(235, 24%, 19%)");
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");
         r.style.setProperty("--Very-Dark-Grayish-Blue2D", "hsl(237, 14%, 26%)");
+
         submitBtn.style.background = "lightslategray url(images/icons8-enter-24.png) center no-repeat";
     
     }
 })
-
+// CLEAR COMPLETED TODOS
 clearCompleted.addEventListener("click", function() {
-    for (let i = 0; i < todosBox.childElementCount;i++) {
+    for (let i = 0; i < todosBox.childElementCount; i++) {
     if (todosBox.children[i].classList.contains("completed")) {
         todosBox.children[i].remove()
-        } else {
-           console.log(i) 
-        }
-        
     }
-checkCount()
+  } checkCount()
 })
 
 
 function checkCount() {
-    itemsLeft.textContent = todosBox.childElementCount
-}
+    let count = 0;
+    for (let i = 0; i < todosBox.childElementCount; i++) {
+        
+        if (todosBox.children[i].classList.contains("active")) {
+            count++
+        }
+        if (todosBox.childElementCount == 0) {
+            count = 0
+        }
+    itemsLeft.textContent = count
+}}
+
+//SORT TODOS FUNCTION
+sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {
+    sortBtns.forEach(btn => btn.style.color = "var(--Very-Dark-Grayish-Blue1D)"),
+        this.style.color = "#3a48c7";
+
+    const nodeToArr = Array.from(todosBox.children);
+    for (let i = 0; i < todosBox.childElementCount; i++) {
+      if (!nodeToArr[i].classList.contains(this.id)) {
+        nodeToArr[i].classList.add("display-none")
+      } else {
+        nodeToArr[i].classList.remove("display-none")
+      }
+
+    }
+}))

@@ -97,6 +97,7 @@ h1 {
 .submit-btn {
     background: lightslategray url(images/icons8-enter-24.png) center no-repeat;
     width: 3.5rem;
+    height: var(--td-height);
     border: none;
     outline: none;
     border-radius: 0 .3rem .3rem 0;
@@ -123,8 +124,8 @@ h1 {
 
 .todos {
     -webkit-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
--moz-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
 }
 
 .todo:first-child {
@@ -200,6 +201,10 @@ box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
     border-radius: 0 0 .3rem .3rem;
     padding: 0 .8rem;
     margin-top: -1rem;
+
+    -webkit-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
 }
 
 .sort-todos {
@@ -208,7 +213,7 @@ box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
 }
 
 .bottom-text:hover {
-    color: #878fff;
+    color: #878fff!important;
     cursor: pointer;
 } 
 
@@ -226,4 +231,12 @@ box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
 
 .display-none {
     display: none;
+}
+
+@media (max-width: 500px) {
+    .bottom-part {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
 }

@@ -1,15 +1,13 @@
 const input = document.getElementById("create-todo");
 const todosBox = document.querySelector(".todos");
-const todos = document.querySelectorAll(".todo");
+
 const themeBtn = document.querySelector(".mode-toggle");
 const submitBtn = document.querySelector(".submit-btn");
 
 const itemsLeft = document.getElementById("items-left");
-
 const sortBtns = document.querySelectorAll(".sort-btn"); 
-
 const clearCompleted = document.getElementById("clear-completed");
-const removeBtn = document.querySelectorAll(".remove-todo-btn");
+
 
 submitBtn.addEventListener("click", createTodo);
 
@@ -105,6 +103,10 @@ input.addEventListener("keypress", function(event) {
   });
 
 
+
+
+
+
 // THEME CHANGE
     const r = document.querySelector(":root");
     const body = document.querySelector("body");
@@ -132,26 +134,34 @@ themeBtn.addEventListener("click", function() {
 })
 // CLEAR COMPLETED TODOS
 clearCompleted.addEventListener("click", function() {
-    for (let i = 0; i < todosBox.childElementCount; i++) {
-    if (todosBox.children[i].classList.contains("completed")) {
-        todosBox.children[i].remove()
-    }
-  } checkCount()
+
+    Array.from(todosBox.children)
+    .filter(x=>x.classList.contains("completed"))
+    .map(x=>x.animate([
+        // keyframes
+        { opacity: 1},
+        { opacity: 0},
+        { transform: 'translateX(700px)' },
+        { opacity: 0}
+      ], {
+        // timing options
+        duration: 500,
+        iterations: 1,
+      }))
+
+Array.from(todosBox.children)
+        .filter(x=>x.classList.contains("completed"))
+        .map(x=>setTimeout(() => {x.remove()}, 500))
+        
+
 })
 
 
 function checkCount() {
-    let count = 0;
-    for (let i = 0; i < todosBox.childElementCount; i++) {
-        
-        if (todosBox.children[i].classList.contains("active")) {
-            count++
-        }
-        if (todosBox.childElementCount == 0) {
-            count = 0
-        }
+    let count = Array.from(todosBox.children).filter(x=>x.classList.contains("active")).length
+
     itemsLeft.textContent = count
-}}
+}
 
 //SORT TODOS FUNCTION
 sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {

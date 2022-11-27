@@ -67,14 +67,12 @@ h1 {
     border-radius: 50%;
     cursor: pointer;
     transition: 200ms ease-in-out;
-    filter: hue-rotate(90deg);
 }
 
 .mode-toggle:checked {
     background: url(images/icon-moon.svg);
     
 }
-
 
 .todo-input-container {
     position: relative;
@@ -96,7 +94,7 @@ h1 {
 
 .submit-btn {
     background: var(--todos-bg-dark);
-    width: 3.5rem;
+    width: 10%;
     height: var(--td-height);
     border: none;
     outline: none;
@@ -104,7 +102,6 @@ h1 {
     cursor: pointer;
     font-size: 2.5rem;
     color: var(--todos-bg-light);
-    vertical-align: middle;
 }
 
 #create-todo {

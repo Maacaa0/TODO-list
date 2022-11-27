@@ -13,10 +13,12 @@ submitBtn.addEventListener("click", createTodo);
 
 function createTodo() {
     if (input.value !== "") {
+
     const newTodo = document.createElement("DIV");
     newTodo.classList.add("all");
     newTodo.classList.add("todo");
     newTodo.classList.add("active");
+    newTodo.setAttribute("draggable", true)
    
 
     const newFlexDiv = document.createElement("DIV");
@@ -119,7 +121,8 @@ themeBtn.addEventListener("click", function() {
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(240deg 12% 10% / 58%)");
         r.style.setProperty("--Very-Dark-Grayish-Blue2D", "lightgray");
 
-        submitBtn.style.background = "#d9d9d9 url(images/icons8-enter-24.png) center no-repeat";
+        submitBtn.style.background = "#fff";
+        submitBtn.style.color = "lightslategray"
     
     } else {
         body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top no-repeat";
@@ -128,7 +131,8 @@ themeBtn.addEventListener("click", function() {
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");
         r.style.setProperty("--Very-Dark-Grayish-Blue2D", "hsl(237, 14%, 26%)");
 
-        submitBtn.style.background = "lightslategray url(images/icons8-enter-24.png) center no-repeat";
+        submitBtn.style.background = "var(--todos-bg-dark)";
+        submitBtn.style.color = "var(--todos-bg-light)"
     
     }
 })
@@ -158,8 +162,8 @@ Array.from(todosBox.children)
 
 
 function checkCount() {
-    let count = Array.from(todosBox.children).filter(x=>x.classList.contains("active")).length
-
+    let count = Array.from(todosBox.children).filter(x=>x.classList.contains("active")).length;
+    
     itemsLeft.textContent = count
 }
 

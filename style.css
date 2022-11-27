@@ -95,13 +95,15 @@ h1 {
 }
 
 .submit-btn {
-    background: lightslategray url(images/icons8-enter-24.png) center no-repeat;
+    background: var(--todos-bg-dark);
     width: 3.5rem;
     height: var(--td-height);
     border: none;
     outline: none;
     border-radius: 0 .3rem .3rem 0;
     cursor: pointer;
+    font-size: 2.5rem;
+    color: var(--todos-bg-light);
 }
 
 #create-todo {

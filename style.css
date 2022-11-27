@@ -100,6 +100,7 @@ h1 {
     outline: none;
     border-radius: 0 .3rem .3rem 0;
     cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 2.5rem;
     color: var(--todos-bg-light);
 }

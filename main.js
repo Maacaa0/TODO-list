@@ -181,4 +181,13 @@ sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {
       }
 
     }
-}))
+}));
+
+
+//Drag n drop USING SORTABLE JS 
+//  https://www.youtube.com/watch?v=viTWjfJ9CbY
+let drag = document.querySelector("#list");
+
+new Sortable(drag, {
+  animation: 150
+});

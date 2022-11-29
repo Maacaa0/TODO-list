@@ -208,7 +208,9 @@ h1 {
     padding: 0 .8rem;
     margin-top: -1rem;
 
-    box-shadow: 0px 16px 20px -19px rgb(0 0 0 / 75%);
+    -webkit-box-shadow: 0px 15px 20px -21px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 15px 20px -21px rgba(0,0,0,0.75);
+    box-shadow: 0px 15px 20px -21px rgba(0,0,0,0.75);
 }
 
 .sort-todos {
@@ -278,7 +280,7 @@ footer {
         border-radius: 0.4rem;
         width: 100%;
         justify-content: center;
-        
+        box-shadow: inherit;
     }
 
     footer {

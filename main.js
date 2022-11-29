@@ -7,6 +7,7 @@ const submitBtn = document.querySelector(".submit-btn");
 const itemsLeft = document.getElementById("items-left");
 const sortBtns = document.querySelectorAll(".sort-btn"); 
 const clearCompleted = document.getElementById("clear-completed");
+const emptyBox = document.getElementById("empty");
 
 submitBtn.addEventListener("click", createTodo);
 
@@ -51,6 +52,7 @@ function createTodo() {
              iterations: 1,
            });
            setTimeout(() => {checkCount()}, 500);
+           setTimeout(() => {checkEmpty()}, 500);
      })
 
     //DISPLAY X (for deleting todos) ON MOUSEOVER
@@ -86,9 +88,11 @@ function createTodo() {
             newTodo.firstChild.firstChild.checked = false; 
         }
         checkCount();
+        checkEmpty();
     })
         input.value = "";
-        checkCount()
+        checkCount(),
+        checkEmpty();
   }
 }
 
@@ -138,32 +142,34 @@ themeBtn.addEventListener("click", function() {
 // CLEAR COMPLETED TODOS
 clearCompleted.addEventListener("click", function() {
 
-    Array.from(todosBox.children)
-    .filter(x=>x.classList.contains("completed"))
-    .map(x=>x.animate([
-        // keyframes
-        { opacity: 1},
-        { opacity: 0},
-        { transform: 'translateX(700px)' },
-        { opacity: 0}
-      ], {
-        // timing options
-        duration: 500,
-        iterations: 1,
-      }))
+  Array.from(todosBox.children)
+       .filter(x=>x.classList.contains("completed"))
+       .map(x=>x.animate([
+          // keyframes
+          { opacity: 1},
+          { opacity: 0},
+          { transform: 'translateX(700px)' },
+          { opacity: 0}
+        ], {
+          // timing options
+          duration: 500,
+          iterations: 1,
+        }))
 
-Array.from(todosBox.children)
-        .filter(x=>x.classList.contains("completed"))
-        .map(x=>setTimeout(() => {x.remove()}, 500))
+  Array.from(todosBox.children)
+       .filter(x=>x.classList.contains("completed"))
+       .map(x=>setTimeout(() => {x.remove()}, 500));
         
-
+        setTimeout(() => {checkEmpty()}, 500);
+        
 })
 
 
 function checkCount() {
     let count = Array.from(todosBox.children).filter(x=>x.classList.contains("active")).length;
     
-    itemsLeft.textContent = count
+    itemsLeft.textContent = count;
+    return count
 }
 
 //SORT TODOS FUNCTION
@@ -189,3 +195,12 @@ let drag = document.querySelector("#list");
 new Sortable(drag, {
   animation: 150
 });
+
+
+function checkEmpty() {
+  if (emptyBox.nextElementSibling !== null) {
+    emptyBox.style.display = "none";
+  } else {
+    setTimeout(() => {emptyBox.style.display = "flex";}, 800);
+  }
+}

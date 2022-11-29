@@ -8,7 +8,6 @@ const itemsLeft = document.getElementById("items-left");
 const sortBtns = document.querySelectorAll(".sort-btn"); 
 const clearCompleted = document.getElementById("clear-completed");
 
-
 submitBtn.addEventListener("click", createTodo);
 
 function createTodo() {
@@ -70,6 +69,7 @@ function createTodo() {
     newTodo.appendChild(newDeleteBtn);
     todosBox.appendChild(newTodo);
     
+
     //SWITCH ACTIVE / COMPLETED STATE
     newTodo.addEventListener("click", function(e) {
         if (e.target == newDeleteBtn) {
@@ -115,7 +115,7 @@ input.addEventListener("keypress", function(event) {
 
 themeBtn.addEventListener("click", function() {
     if (themeBtn.checked){
-        body.style.background = "var(--bg-Light) url(images/bg-desktop-light.jpg) top no-repeat";
+        body.style.background = "var(--bg-Light) url(images/bg-desktop-light.jpg) top / 100vw 300px no-repeat";
 
         r.style.setProperty("--todos-bg-dark", "#fff");
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(240deg 12% 10% / 58%)");
@@ -125,7 +125,7 @@ themeBtn.addEventListener("click", function() {
         submitBtn.style.color = "lightslategray"
     
     } else {
-        body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top no-repeat";
+        body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top / 100vw 300px no-repeat";
         
         r.style.setProperty("--todos-bg-dark", "hsl(235, 24%, 19%)");
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");

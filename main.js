@@ -17,6 +17,7 @@ function createTodo() {
     newTodo.classList.add("all");
     newTodo.classList.add("todo");
     newTodo.classList.add("active");
+    newTodo.setAttribute("id", "item");
     newTodo.setAttribute("draggable", true)
    
 
@@ -62,14 +63,12 @@ function createTodo() {
         newTodo.lastElementChild.classList.remove("toggle-block");
     })
 
-    
     newFlexDiv.appendChild(newCheckBox);
     newFlexDiv.appendChild(newPara);
     newTodo.appendChild(newFlexDiv);
     newTodo.appendChild(newDeleteBtn);
     todosBox.appendChild(newTodo);
-    
-
+  
     //SWITCH ACTIVE / COMPLETED STATE
     newTodo.addEventListener("click", function(e) {
         if (e.target == newDeleteBtn) {
@@ -183,9 +182,8 @@ sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {
     }
 }));
 
-
-//Drag n drop USING SORTABLE JS 
 //  https://www.youtube.com/watch?v=viTWjfJ9CbY
+//Drag n drop USING SORTABLE JS 
 let drag = document.querySelector("#list");
 
 new Sortable(drag, {

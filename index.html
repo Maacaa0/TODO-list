@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js" integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
   <script src="main.js" defer></script>
   
+
   <title>Frontend Mentor | Todo app</title>
  
 </head>
@@ -23,10 +24,12 @@
 
     <!-- TEXT INPUT  -->
     <form class="todo-input-container">
-    <input type="text" placeholder="Create a new todo..." id="create-todo"><button type="button" class="submit-btn">+</button></form>
+    <input type="text" placeholder="Create a new todo..." id="create-todo">
+    <button type="button" class="submit-btn">+</button></form>
 
      <!-- EACH TODOS -->
     <div class="todos" id="list">
+      <div id="empty"><p class="empty_text">TODO list is empty!</p></div>
       
     </div>
     <!-- TODOS BOTTOM PART  -->
@@ -37,10 +40,11 @@
           <p id="active" class="sort-btn bottom-text">Active</p> 
           <p id="completed" class="sort-btn bottom-text">Completed</p> 
         </div>
-        <p id="clear-completed" class="bottom-text">Clear Completed</p>
-          
-          <!-- Drag and drop to reorder list -->
+          <p id="clear-completed" class="bottom-text">Clear Completed</p> 
         </div>
+        <footer>
+          <p class="footer_text">Drag and drop to reorder list</p>
+        </footer>
   </main>
 </body>
 </html>

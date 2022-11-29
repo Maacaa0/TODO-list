@@ -208,9 +208,7 @@ h1 {
     padding: 0 .8rem;
     margin-top: -1rem;
 
-    -webkit-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
-    -moz-box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
-    box-shadow: 2px 3px 29px -17px rgba(0,0,0,0.75);
+    box-shadow: 0px 16px 20px -19px rgb(0 0 0 / 75%);
 }
 
 .sort-todos {
@@ -253,7 +251,7 @@ footer {
     color: hsl(233deg 35% 57%);
     background: var(--todos-bg-dark);
     border-radius: .3rem .3rem 0 0;
-    border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D);
+    /* border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D); */
 }
 
 .footer_text {
@@ -280,7 +278,7 @@ footer {
         border-radius: 0.4rem;
         width: 100%;
         justify-content: center;
-        box-shadow: inherit;
+        
     }
 
     footer {

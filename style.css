@@ -265,6 +265,11 @@ footer {
 }
 
 @media (max-width: 500px) {
+    
+    body {
+        background: var(--bg-Dark) url(images/bg-mobile-dark.jpg) top / 100vw 300px no-repeat;
+    }
+    
     .bottom-part {
         position: relative;
         justify-content: space-around;

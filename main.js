@@ -118,8 +118,11 @@ input.addEventListener("keypress", function(event) {
 
 themeBtn.addEventListener("click", function() {
     if (themeBtn.checked){
+      if (body.clientWidth > 500) {
         body.style.background = "var(--bg-Light) url(images/bg-desktop-light.jpg) top / 100vw 300px no-repeat";
-
+      } else {
+        body.style.background = "var(--bg-Light) url(images/bg-mobile-light.jpg) top / 100vw 300px no-repeat";
+      };
         r.style.setProperty("--todos-bg-dark", "#fff");
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(240deg 12% 10% / 58%)");
         r.style.setProperty("--Very-Dark-Grayish-Blue2D", "lightgray");
@@ -128,8 +131,11 @@ themeBtn.addEventListener("click", function() {
         submitBtn.style.color = "lightslategray"
     
     } else {
+      if (body.clientWidth > 500) {
         body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top / 100vw 300px no-repeat";
-        
+      } else {
+        body.style.background = "var(--bg-Dark) url(images/bg-mobile-dark.jpg) top / 100vw 300px no-repeat";
+      };   
         r.style.setProperty("--todos-bg-dark", "hsl(235, 24%, 19%)");
         r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");
         r.style.setProperty("--Very-Dark-Grayish-Blue2D", "hsl(237, 14%, 26%)");
@@ -188,15 +194,6 @@ sortBtns.forEach(sortingBtn => sortingBtn.addEventListener("click", function() {
     }
 }));
 
-//  https://www.youtube.com/watch?v=viTWjfJ9CbY
-//Drag n drop USING SORTABLE JS 
-let drag = document.querySelector("#list");
-
-new Sortable(drag, {
-  animation: 150
-});
-
-
 function checkEmpty() {
   if (emptyBox.nextElementSibling !== null) {
     emptyBox.style.display = "none";
@@ -204,3 +201,11 @@ function checkEmpty() {
     setTimeout(() => {emptyBox.style.display = "flex";}, 800);
   }
 }
+
+//  https://www.youtube.com/watch?v=viTWjfJ9CbY
+//Drag n drop USING SORTABLE JS 
+let drag = document.querySelector("#list");
+
+new Sortable(drag, {
+  animation: 150
+});

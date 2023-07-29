@@ -9,11 +9,22 @@ const sortBtns = document.querySelectorAll(".sort-btn");
 const clearCompleted = document.getElementById("clear-completed");
 const emptyBox = document.getElementById("empty");
 
-submitBtn.addEventListener("click", createTodo);
+submitBtn.addEventListener("click", ()=> createTodo(input.value));
 
-function createTodo() {
-    if (input.value !== "") {
+if(localStorage.todos) {
+  const getTodosFromStorage = JSON.parse(localStorage.getItem("todos"))
+  getTodosFromStorage.map(todo => createTodo(todo))
+}
 
+function saveTodo() {
+  const currentArr = []
+      document.querySelectorAll(".todo-text").forEach(x => currentArr.push(x.innerHTML))
+      localStorage.setItem("todos", JSON.stringify(currentArr))
+}
+
+function createTodo(text) {
+  if (text !== "") {
+    
     const newTodo = document.createElement("DIV");
     newTodo.classList.add("all");
     newTodo.classList.add("todo");
@@ -28,10 +39,11 @@ function createTodo() {
     const newCheckBox = document.createElement("input");
     newCheckBox.setAttribute("type", "checkbox");
     newCheckBox.classList.add("todo-check");
+    newCheckBox.checked = false;
 
     const newPara = document.createElement("p");
     newPara.classList.add("todo-text");
-    newPara.textContent = input.value;
+    newPara.textContent = text;
 
     const newDeleteBtn = document.createElement("button");
     newDeleteBtn.classList.add("remove-todo-btn");
@@ -51,6 +63,7 @@ function createTodo() {
              duration: 500,
              iterations: 1,
            });
+           setTimeout(() => {saveTodo()}, 600);
            setTimeout(() => {checkCount()}, 500);
            setTimeout(() => {checkEmpty()}, 500);
      })
@@ -89,10 +102,11 @@ function createTodo() {
         }
         checkCount();
         checkEmpty();
-    })
-        input.value = "";
-        checkCount(),
-        checkEmpty();
+      })
+      input.value = "";
+      checkCount(),
+      checkEmpty();
+      saveTodo()
   }
 }
 
@@ -108,43 +122,42 @@ input.addEventListener("keypress", function(event) {
   });
 
 
-
-
-
-
 // THEME CHANGE
-    const r = document.querySelector(":root");
-    const body = document.querySelector("body");
 
-themeBtn.addEventListener("click", function() {
-    if (themeBtn.checked){
-      if (body.clientWidth > 500) {
-        body.style.background = "var(--bg-Light) url(images/bg-desktop-light.jpg) top / 100vw 300px no-repeat";
-      } else {
-        body.style.background = "var(--bg-Light) url(images/bg-mobile-light.jpg) top / 100vw 300px no-repeat";
-      };
-        r.style.setProperty("--todos-bg-dark", "#fff");
-        r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(240deg 12% 10% / 58%)");
-        r.style.setProperty("--Very-Dark-Grayish-Blue2D", "lightgray");
+const r = document.querySelector(":root");
+const body = document.querySelector("body");
 
-        submitBtn.style.background = "#fff";
-        submitBtn.style.color = "lightslategray"
-    
-    } else {
-      if (body.clientWidth > 500) {
-        body.style.background = "var(--bg-Dark) url(images/bg-desktop-dark.jpg) top / 100vw 300px no-repeat";
-      } else {
-        body.style.background = "var(--bg-Dark) url(images/bg-mobile-dark.jpg) top / 100vw 300px no-repeat";
-      };   
-        r.style.setProperty("--todos-bg-dark", "hsl(235, 24%, 19%)");
-        r.style.setProperty("--Light-Grayish-Blue-Dark", "hsl(234, 39%, 85%)");
-        r.style.setProperty("--Very-Dark-Grayish-Blue2D", "hsl(237, 14%, 26%)");
+function setLightTheme() {
+  body.classList.remove("dark");
+  body.style.background = "var(--bg-Light)";
+  
+  submitBtn.style.color = "black";
 
-        submitBtn.style.background = "var(--todos-bg-dark)";
-        submitBtn.style.color = "var(--todos-bg-light)"
-    
-    }
-})
+
+  r.style.setProperty("--theme", "#fff")
+  r.style.setProperty("--theme-text", "#393a4c")
+}
+
+function setDarkTheme() {
+  body.classList.add("dark");
+  body.style.background = "var(--bg-Dark)";
+
+  submitBtn.style.color = "white";
+
+  r.style.setProperty("--theme", "#221e1e")
+  r.style.setProperty("--theme-text", "#989dcb")
+}
+
+function toggleTheme() {
+  if (themeBtn.checked) {
+    setLightTheme();
+  } else {
+    setDarkTheme();
+  }
+}
+
+themeBtn.addEventListener("click", toggleTheme);
+
 // CLEAR COMPLETED TODOS
 clearCompleted.addEventListener("click", function() {
 
@@ -167,6 +180,7 @@ clearCompleted.addEventListener("click", function() {
        .map(x=>setTimeout(() => {x.remove()}, 500));
         
         setTimeout(() => {checkEmpty()}, 500);
+        setTimeout(() => {saveTodo()}, 600);
         
 })
 

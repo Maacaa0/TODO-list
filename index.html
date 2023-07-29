@@ -4,14 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/icon-check.svg">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js" integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-  <script src="main.js" defer></script>
   
-
-  <title>Frontend Mentor | Todo app</title>
+  <title>TODO app</title>
  
 </head>
 <body>
@@ -19,7 +15,7 @@
     <!-- HEADLINE + MODE TOGGLE -->
     <div class="top">
       <h1>Todo</h1>
-      <input type="checkbox" class="mode-toggle">
+      <input id="theme-switcher" type="checkbox" class="mode-toggle">
     </div>
 
     <!-- TEXT INPUT  -->
@@ -46,5 +42,8 @@
           <p class="footer_text">Drag and drop to reorder list</p>
         </footer>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js" integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="main.js"></script>
 </body>
 </html>

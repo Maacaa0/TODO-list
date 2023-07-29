@@ -20,10 +20,8 @@ if(localStorage.todos) {
   getTodosFromStorage.map(todo => createTodo(todo.text, todo.isChecked))
 }
 
-if (JSON.parse(localStorage.theme)) {
-  setLightTheme()
-} else {
-  setDarkTheme()
+if (localStorage.theme) {
+  JSON.parse(localStorage.theme)  ? setLightTheme() : setDarkTheme()
 }
 
 function saveTodo() {
@@ -149,9 +147,10 @@ function setLightTheme() {
   body.classList.remove("dark");
   body.style.background = "var(--bg-Light)";
   themeBtn.checked = true
+
   submitBtn.style.color = "black";
-
-
+  
+  
   r.style.setProperty("--theme", "#fff")
   r.style.setProperty("--theme-text", "#393a4c")
 }
@@ -159,6 +158,7 @@ function setLightTheme() {
 function setDarkTheme() {
   body.classList.add("dark");
   body.style.background = "var(--bg-Dark)";
+  themeBtn.checked = false
 
   submitBtn.style.color = "white";
 
@@ -172,7 +172,6 @@ function toggleTheme() {
   } else {
     setDarkTheme();
   }
-  console.log(themeBtn.checked)
   localStorage.setItem("theme", JSON.stringify(themeBtn.checked))
 }
 

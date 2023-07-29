@@ -275,6 +275,10 @@ footer {
 }
 
 @media (max-width: 500px) {
+
+    main {
+        margin-top: 0;
+    }
     
     .bottom-part {
         position: relative;

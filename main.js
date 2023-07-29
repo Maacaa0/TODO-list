@@ -13,16 +13,21 @@ submitBtn.addEventListener("click", ()=> createTodo(input.value));
 
 if(localStorage.todos) {
   const getTodosFromStorage = JSON.parse(localStorage.getItem("todos"))
-  getTodosFromStorage.map(todo => createTodo(todo))
+  getTodosFromStorage.map(todo => createTodo(todo.text, todo.isChecked))
+  // console.log(getTodosFromStorage)
 }
 
 function saveTodo() {
   const currentArr = []
-      document.querySelectorAll(".todo-text").forEach(x => currentArr.push(x.innerHTML))
+  document.querySelectorAll(".todo-text").forEach(x => {
+        const isChecked = x.classList.contains("completed")
+        currentArr.push({text: x.innerHTML, isChecked: isChecked})
+      })
+      // const checkfor = [...currentArr]
       localStorage.setItem("todos", JSON.stringify(currentArr))
 }
 
-function createTodo(text) {
+function createTodo(text, checked) {
   if (text !== "") {
     
     const newTodo = document.createElement("DIV");
@@ -39,11 +44,16 @@ function createTodo(text) {
     const newCheckBox = document.createElement("input");
     newCheckBox.setAttribute("type", "checkbox");
     newCheckBox.classList.add("todo-check");
-    newCheckBox.checked = false;
-
     const newPara = document.createElement("p");
     newPara.classList.add("todo-text");
     newPara.textContent = text;
+
+    if(checked) {
+      newTodo.classList.add("completed");
+      newTodo.classList.remove("active");
+      newPara.classList.add("completed");
+      newCheckBox.checked = true;
+    }
 
     const newDeleteBtn = document.createElement("button");
     newDeleteBtn.classList.add("remove-todo-btn");
@@ -86,22 +96,23 @@ function createTodo(text) {
   
     //SWITCH ACTIVE / COMPLETED STATE
     newTodo.addEventListener("click", function(e) {
-        if (e.target == newDeleteBtn) {
-            return
-        }
-        if (!newTodo.classList.contains("completed")) {
-            newTodo.classList.add("completed");
-            newTodo.classList.remove("active");
-            newTodo.firstChild.firstChild.nextSibling.classList.add("completed");
-            newTodo.firstChild.firstChild.checked = true; 
-        } else {
-            newTodo.classList.remove("completed");
-            newTodo.classList.add("active");
-            newTodo.firstChild.firstChild.nextSibling.classList.remove("completed");
-            newTodo.firstChild.firstChild.checked = false; 
-        }
-        checkCount();
-        checkEmpty();
+      if (e.target == newDeleteBtn) {
+        return
+      }
+      if (!newTodo.classList.contains("completed")) {
+        newTodo.classList.add("completed");
+        newTodo.classList.remove("active");
+        newTodo.firstChild.firstChild.nextSibling.classList.add("completed");
+        newTodo.firstChild.firstChild.checked = true; 
+      } else {
+        newTodo.classList.remove("completed");
+        newTodo.classList.add("active");
+        newTodo.firstChild.firstChild.nextSibling.classList.remove("completed");
+        newTodo.firstChild.firstChild.checked = false; 
+      }
+      checkCount();
+      checkEmpty();
+      saveTodo()
       })
       input.value = "";
       checkCount(),

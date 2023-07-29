@@ -9,12 +9,21 @@ const sortBtns = document.querySelectorAll(".sort-btn");
 const clearCompleted = document.getElementById("clear-completed");
 const emptyBox = document.getElementById("empty");
 
+const r = document.querySelector(":root");
+const body = document.querySelector("body");
+
+
 submitBtn.addEventListener("click", ()=> createTodo(input.value));
 
 if(localStorage.todos) {
   const getTodosFromStorage = JSON.parse(localStorage.getItem("todos"))
   getTodosFromStorage.map(todo => createTodo(todo.text, todo.isChecked))
-  // console.log(getTodosFromStorage)
+}
+
+if (JSON.parse(localStorage.theme)) {
+  setLightTheme()
+} else {
+  setDarkTheme()
 }
 
 function saveTodo() {
@@ -23,7 +32,7 @@ function saveTodo() {
         const isChecked = x.classList.contains("completed")
         currentArr.push({text: x.innerHTML, isChecked: isChecked})
       })
-      // const checkfor = [...currentArr]
+
       localStorage.setItem("todos", JSON.stringify(currentArr))
 }
 
@@ -135,13 +144,11 @@ input.addEventListener("keypress", function(event) {
 
 // THEME CHANGE
 
-const r = document.querySelector(":root");
-const body = document.querySelector("body");
 
 function setLightTheme() {
   body.classList.remove("dark");
   body.style.background = "var(--bg-Light)";
-  
+  themeBtn.checked = true
   submitBtn.style.color = "black";
 
 
@@ -165,7 +172,10 @@ function toggleTheme() {
   } else {
     setDarkTheme();
   }
+  console.log(themeBtn.checked)
+  localStorage.setItem("theme", JSON.stringify(themeBtn.checked))
 }
+
 
 themeBtn.addEventListener("click", toggleTheme);
 

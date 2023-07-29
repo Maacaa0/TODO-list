@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400;700&display=swap');
 
 :root {
-    --bg-Light: hsl(0, 0%, 98%);
+    --bg-Light: #6cadc7;
     --todos-bg-light: hsl(236, 33%, 92%);
     --Light-Grayish-Blue-Light: hsl(233, 11%, 84%);
     --Dark-Grayish-Blue-Light: hsl(236, 9%, 61%);
@@ -9,7 +9,7 @@
 
 /* ### Dark Theme */
 
-    --bg-Dark: hsl(235, 21%, 11%);
+    --bg-Dark: #2d2d34;
     --todos-bg-dark: hsl(235, 24%, 19%);
     --Light-Grayish-Blue-Dark: hsl(234, 39%, 85%);
     --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
@@ -19,6 +19,9 @@
 
     --left-pad: 4.6rem;
     --td-height: 4rem;
+
+    --theme: #221e1e;
+    --theme-text: #989dcb;
 }
 
 * {
@@ -33,7 +36,7 @@ body {
     justify-content: center;
     min-height: 100vh;
 
-    background: var(--bg-Dark) url(images/bg-desktop-dark.jpg) top / 100vw 300px no-repeat;
+    background: var(--bg-Dark) top / 100vw 300px no-repeat;
 }
 
 main {
@@ -52,16 +55,21 @@ main {
 }
 
 h1 {
-    color: var(--bg-Light);
-    font-size: 2.5rem;
-    letter-spacing: 15px;
+    color: white;
+    font-size: 4rem;
+    letter-spacing: -2px;
+    margin-bottom: 1rem;
 }
 
 .mode-toggle {
+    position: relative;
+    top: 5px;
     appearance: none;
-    background: transparent url(images/icon-sun.svg) center center no-repeat;
-    width: 1.5rem;
-    height: 1.5rem;
+    background-image: url(images/icon-sun.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 2.5rem;
+    height: 2.5rem;
     border: none;
     outline: none;
     border-radius: 50%;
@@ -70,7 +78,7 @@ h1 {
 }
 
 .mode-toggle:checked {
-    background: url(images/icon-moon.svg);
+    background-image: url(images/icon-moon.svg);
     
 }
 
@@ -97,7 +105,7 @@ h1 {
 }
 
 .submit-btn {
-    background: var(--todos-bg-dark);
+    background: var(--theme);
     width: 3.5rem;
     height: var(--td-height);
     border: none;
@@ -118,8 +126,8 @@ h1 {
     border: none;
     outline: none;
     width: 100%;
-    color: var(--Light-Grayish-Blue-Dark);
-    background-color: var(--todos-bg-dark);
+    color: var(--theme-text);
+    background: var(--theme);
 }
 
 
@@ -140,7 +148,7 @@ h1 {
 .todo {
     display: flex;
     align-items: center;
-    background: var(--todos-bg-dark);
+    background: var(--theme);
     position: relative;
     /* padding-left: var(--left-pad); */
     border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D);
@@ -157,7 +165,8 @@ h1 {
     flex-shrink: 0;
     border: 1px solid var(--Very-Dark-Grayish-Blue2D);
     border-radius: 50%;
-    background: transparent;
+    background-image: transparent;
+    background-position: 55% 55%;
     align-self: center;
     margin-left: 1.6rem;
     margin-right: 1.4rem;
@@ -165,14 +174,15 @@ h1 {
 }
 
 .todo-check:checked {
+    transition: 200ms ease-in-out;
     background-image: url(images/icon-check.svg), linear-gradient(135deg, rgba(102,196,219,1) 10%, rgba(217,120,255,1) 91%);
     background-repeat: no-repeat;
     background-position: 55% 55%;
-    transition: 200ms ease-in-out;
 }
 
+
 .todo-text {
-    color: var(--Light-Grayish-Blue-Dark);
+    color: var(--theme-text);
     font-size: 1.2rem;
     letter-spacing: -0.8px;
     padding-right: 2rem;
@@ -181,7 +191,7 @@ h1 {
 
 .completed {
     text-decoration: line-through;
-    color: var(--Very-Dark-Grayish-Blue2D);
+    color: darkgray;
 }
 
 .remove-todo-btn {
@@ -203,7 +213,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     color: var(--Very-Dark-Grayish-Blue1D);
-    background: var(--todos-bg-dark);
+    background: var(--theme);
     border-radius: 0 0 .3rem .3rem;
     padding: 0 .8rem;
     margin-top: -1rem;
@@ -250,8 +260,8 @@ footer {
     justify-content: center;
     align-items: center;
     height: var(--td-height);
-    color: hsl(233deg 35% 57%);
-    background: var(--todos-bg-dark);
+    color: #999999;
+    background: var(--theme);
     border-radius: .3rem .3rem 0 0;
     /* border-bottom: 1px solid var(--Very-Dark-Grayish-Blue2D); */
 }
@@ -265,10 +275,6 @@ footer {
 }
 
 @media (max-width: 500px) {
-    
-    body {
-        background: var(--bg-Dark) url(images/bg-mobile-dark.jpg) top / 100vw 300px no-repeat;
-    }
     
     .bottom-part {
         position: relative;
